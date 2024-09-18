@@ -1,0 +1,25 @@
+[project]
+name = "md2book"
+version = "2024.09.18"
+description = "My markdown to epub/html ebook generator."
+keywords = ["ebook", "markdown", "epub", "html", "generator"]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">= 3.8"
+dependencies = [
+  "markdown",
+  "lxml",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python"
+]
+
+
+[project.urls]
+Repository = "https://github.com/romanw/md2book.git"
+
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
