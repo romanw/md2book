@@ -1,0 +1,18 @@
+pkgbase = md2book
+pkgdesc = Markdown to epub/html ebook generator.
+pkgver = 2024.09.18
+pkgrel = 1
+url = https://github.com/romanw/md2book
+arch = any
+license = MIT
+checkdepends = python-lxml
+checkdepends = git
+checkdepends = python-markdown
+makedepends = python-build
+makedepends = python-installer
+depends = python-markdown
+depends = python-lxml
+source = md2book-2024.09.18.tar.gz::https://github.com/romanw/md2book/archive/2024.09.18.tar.gz
+sha512sums = SKIP
+
+pkgname = md2book

@@ -1,0 +1,76 @@
+/* default.css start */
+:root {
+  color-scheme: light dark;
+
+  --primary-accent-colour: crimson;
+  --secondary-accent-colour: forestgreen;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0 auto;
+  width: auto;
+  height: 100%;
+  line-height: 1.4;
+  max-width: 60rem;
+  font-size: 20px;
+}
+
+div.page {
+  margin: 0 1em;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+p {
+  text-indent: 1em;
+  margin: 0.2em;
+  adobe-hyphenate: none;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  -epub-hyphens: none;
+  hyphens: none;
+}
+
+blockquote > p {
+  text-indent: unset;
+  margin: 0.5em 0;
+}
+
+img {
+  display: block;
+  max-height: 100vh;
+  max-height: 100svh;
+  max-width: 100%;
+  margin: auto;
+}
+
+hr {
+  margin: 2em auto;
+  width: 10%;
+}
+
+h1 + p {
+  text-indent: unset;
+}
+h2 + p {
+  text-indent: unset;
+}
+h3 + p {
+  text-indent: unset;
+}
+hr + p {
+  text-indent: unset;
+}
+blockquote + p {
+  text-indent: unset;
+}
+/* default.css end */
