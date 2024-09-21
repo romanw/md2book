@@ -28,11 +28,11 @@ $ md2book [format] path-to-markdown [destination-path]
     custom.css
 ```
 
-## book.json
+### book.json
 
 The `book.json` file must be present and specifies basic meta data (book title, authors name and date) and navigation (or table of contents) infomation. The navigation section allows for sub-sections to any depth (but not tested fully).
 
-### Example
+#### Example
 
 ```json
 {

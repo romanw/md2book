@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Markdown to epub generation
+"""
+
 # epub structure...
 # /
 #   mimetype
@@ -12,7 +16,6 @@
 #   toc.ncx
 # /META-INF
 #   container.xml
-
 
 import argparse
 import json
@@ -311,3 +314,4 @@ if __name__ == "__main__":
   main()
 
 # tree.write(files, encoding="utf-8", xml_declaration=True, doctype='<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">')
+

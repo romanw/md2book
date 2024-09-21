@@ -1,3 +1,8 @@
+"""
+Previous/next navigation component for md2html
+"""
+
+
 class PrevNext:
   markup: str = """
 <prev-next>
@@ -110,24 +115,24 @@ prev-next span.title {
 
     def parseItems(items) -> None:
       for it in items:
-        _file: str = it['file'].split('.')[0] + '.html'
-        _title: str = it['title']
+        _file: str = it["file"].split(".")[0] + ".html"
+        _title: str = it["title"]
         if self.match:
           self.next = [_file, _title]
           self.done = True
           break
-        if it['file'] == self.fn:
+        if it["file"] == self.fn:
           self.match = True
         else:
           self.prev = [_file, _title]
-        if 'items' in it:
-          parseItems(it['items'])
+        if "items" in it:
+          parseItems(it["items"])
           if self.done:
             break
 
-    parseItems(self.toc['nav'])
-    pl: str = ''
-    nl: str = ''
+    parseItems(self.toc["nav"])
+    pl: str = ""
+    nl: str = ""
     if self.prev is not None:
       pl = self.prevlink.format(self.prev[0], self.prev[1])
     if self.next is not None:
@@ -135,3 +140,4 @@ prev-next span.title {
     mu: str = self.markup.format(pl, nl)
     # print(mu)
     return mu
+

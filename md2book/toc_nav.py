@@ -1,3 +1,7 @@
+"""
+Tabel of contest navigation component for md2html
+"""
+
 # import json
 
 
@@ -128,24 +132,25 @@ window.onclick = function (event) {
 
   def getMarkup(self) -> str:
     def createList(items: dict) -> str:
-      ul: str = '<ul>'
+      ul: str = "<ul>"
       for it in items:
-        title: str = it['title']
-        f: str = it['file'].split('.')[0]
-        cl: str = ''
-        if it['file'] == self.fn:
-          cl = 'cp'
-        if 'items' in it:
-          cl += ' subhdr'
+        title: str = it["title"]
+        f: str = it["file"].split(".")[0]
+        cl: str = ""
+        if it["file"] == self.fn:
+          cl = "cp"
+        if "items" in it:
+          cl += " subhdr"
         li: str = f'<li><a href="{f}.html" class="{cl}">{title}</a>'
-        if 'items' in it:
-          li += createList(it['items'])
-        li += '</li>'
+        if "items" in it:
+          li += createList(it["items"])
+        li += "</li>"
         ul += li
-      ul += '</ul>'
+      ul += "</ul>"
       return ul
 
-    nav: dict = self.toc['nav']
+    nav: dict = self.toc["nav"]
     ul: str = createList(nav)
-    mu: str = self.markup.format(self.toc['meta']['title'], ul)
+    mu: str = self.markup.format(self.toc["meta"]["title"], ul)
     return mu
+

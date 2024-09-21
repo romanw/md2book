@@ -1,3 +1,8 @@
+"""
+Page progress compoment for md2html
+"""
+
+
 class PageProgress:
   markup: str = """
 <page-progress>
@@ -50,3 +55,4 @@ window.onscroll = () => {
 
   def __init__(self):
     pass
+

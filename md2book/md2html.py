@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+"""
+Markdown to html generation
+"""
+
+import argparse
 import json
 import markdown
 from pathlib import Path
@@ -38,17 +43,19 @@ class mdHtml:
   def __init__(self, src, dest):
     self.src = src
     self.dest = dest
+
+  def createBook(self) -> None:
     self.dest.mkdir(exist_ok=True)
     self.copyAssets()
     self.genStyles()
     self.genScripts()
-    bj = self.src / 'book.json'
+    bj = self.src / "book.json"
     self.toc: dict = json.loads(bj.read_text())
     self.createHtmlFiles(self.toc)
 
   def copyAssets(self) -> None:
     # assets = [ "css", "fonts", "images" ]
-    assets: list[str] = ['fonts', 'images']
+    assets: list[str] = ["fonts", "images"]
     for ass in assets:
       s = self.src / ass
       if s.exists():
@@ -57,13 +64,13 @@ class mdHtml:
         copytree(str(s), str(d), dirs_exist_ok=True)
 
   def genStyles(self) -> None:
-    self.styles: str = ''
-    dcss = Path('default.css')
+    self.styles: str = ""
+    dcss = Path("default.css")
     self.styles += dcss.read_text()
     self.styles += pageProgress.style
     self.styles += PrevNext.style
     self.styles += tocNav.style
-    css = self.src / 'css'
+    css = self.src / "css"
     for child in css.iterdir():
       if child.is_file():
         self.styles += child.read_text()
@@ -73,33 +80,41 @@ class mdHtml:
     self.scripts += tocNav.script
 
   def md2html(self, item) -> None:
-    pn = PrevNext(self.toc, item['file'])
-    toc = tocNav(self.toc, item['file'])
-    f = self.src / item['file']
+    pn = PrevNext(self.toc, item["file"])
+    toc = tocNav(self.toc, item["file"])
+    f = self.src / item["file"]
     md: str = f.read_text()
-    mu: str = markdown.markdown(md, extensions=['extra'])
-    html: str = self.markup.format(title=item['title'], css=self.styles, progress=PageProgress.markup, content=mu, prevnext=pn.getMarkup(), toc=toc.getMarkup(), scripts=self.scripts)
-    fs: list = item['file'].split('.')
-    fd = self.dest / f'{fs[0]}.html'
+    mu: str = markdown.markdown(md, extensions=["extra"])
+    html: str = self.markup.format(title=item["title"], css=self.styles, progress=PageProgress.markup, content=mu, prevnext=pn.getMarkup(), toc=toc.getMarkup(), scripts=self.scripts)
+    fs: list = item["file"].split(".")
+    fd = self.dest / f"{fs[0]}.html"
     fd.write_text(html)
 
-    print(f'Generated {fs[0]}.html')
+    print(f"Generated {fs[0]}.html")
 
   def createHtmlFiles(self, toc: dict):
     def createHtmlFile(items: dict):
       for it in items:
         self.md2html(it)
-        if 'items' in it:
-          createHtmlFile(it['items'])
+        if "items" in it:
+          createHtmlFile(it["items"])
 
-    createHtmlFile(toc['nav'])
+    createHtmlFile(toc["nav"])
 
 
 def main() -> None:
-  dest = Path('_site/')
-  src = Path.home() / 'code/markdown' / 'garden_beasts' / 'md'
-  ws = mdHtml(src, dest)
+  ap = argparse.ArgumentParser()
+  ap.add_argument("md", type=str, help="path to the folder containing markdown")
+  args = ap.parse_args()
+  dest = Path("_site/")
+  # src = Path.home() / "code/markdown" / "garden_beasts" / "md"
+  src = Path(args.md)
+  src.resolve()
+  if src.exists() and src.is_dir():
+    ws = mdHtml(src, dest)
+    ws.createBook()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
   main()
+
