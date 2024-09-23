@@ -41,25 +41,28 @@ class mdEpub:
     self.dest = dest
     self.cpath = self.dest / "EPUB"
     self.zip = True
+
+  def createBook(self) -> None:
+    bj = self.src / "book.json"
+    self.toc: dict = json.loads(bj.read_text())
+    zfn = self.toc["meta"]["title"]
+    zfn = zfn.replace(" ", "_").lower()
     if self.zip:
-      self.epub = ZipFile(f"{self.src.name}.epub", "w")
+      self.epub = ZipFile(f"{zfn}.epub", "w")
       self.epub.mkdir(self.cpath.stem)
     else:
       self.dest.mkdir(exist_ok=True)
       self.cpath.mkdir(exist_ok=True)
-
-  def createBook(self) -> None:
     self.createMimetype()
     self.createContainerXml()
     self.copyAssets()
-    bj = self.src / "book.json"
-    self.toc: dict = json.loads(bj.read_text())
     self.createTocNcx()
     self.createContentOpf()
     self.createContent()
     if self.zip:
       self.epub.close()
     # shutil.make_archive(f"{self.src.stem}.epub", format="zip", root_dir=str(self.dest)))
+    print(f"\nGenerated {zfn}.epub")
 
   def createMimetype(self) -> None:
     if self.zip:
@@ -257,7 +260,7 @@ class mdEpub:
     else:
       f = self.cpath / f"{fn[0]}.xhtml"
       f.write_text(xhtml)
-    print(f"Created {fn[0]}")
+    print(f"generating {fn[0]}")
 
   def createContent(self) -> None:
     def createChapter(items) -> None:
@@ -292,9 +295,9 @@ class mdEpub:
         else:
           copytree(str(s), str(d), dirs_exist_ok=True)
     if self.zip:
-      self.epub.write("default.css", f"{self.cpath.stem}/css/default.css", ZIP_DEFLATED)
+      self.epub.write(Path(__file__).resolve().parent / "default.css", f"{self.cpath.stem}/css/default.css", ZIP_DEFLATED)
     else:
-      copyfile("default.css", str(self.cpath / "css/default.css"))
+      copyfile(Path(__file__).resolve().parent / "default.css", str(self.cpath / "css/default.css"))
 
 
 def main() -> None:

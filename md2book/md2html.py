@@ -19,6 +19,9 @@ pageProgress = PageProgress()
 
 
 class mdHtml:
+  """
+  Markdown to html class
+  """
   markup: str = """<!doctype html>
 <html lang="en">
 <head>
@@ -42,9 +45,12 @@ class mdHtml:
 
   def __init__(self, src, dest):
     self.src = src
-    self.dest = dest
+    self.dest = dest / "_site"
 
   def createBook(self) -> None:
+    """
+    Create the book
+    """
     self.dest.mkdir(exist_ok=True)
     self.copyAssets()
     self.genStyles()
@@ -65,7 +71,7 @@ class mdHtml:
 
   def genStyles(self) -> None:
     self.styles: str = ""
-    dcss = Path("default.css")
+    dcss = Path(__file__).resolve().parent / "default.css"
     self.styles += dcss.read_text()
     self.styles += pageProgress.style
     self.styles += PrevNext.style
