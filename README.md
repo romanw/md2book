@@ -2,6 +2,9 @@
 
 A basic markdown to epub/html book converter.
 
+> [!WARNING]
+> Little to no testing has been done or thought about. Please feel free to improve on this situation.
+
 ## Dependencies
 
 - python-markdown
@@ -10,11 +13,21 @@ A basic markdown to epub/html book converter.
 ## Usage
 
 ```
-$ md2book [format] path-to-markdown [destination-path]
+usage: md2book [-h] [-e] [-w] [-o OUTPUT] md
+
+positional arguments:
+  md                    path to the folder containing markdown
+
+options:
+  -h, --help            show this help message and exit
+  -e, --epub            generate an epub (default: True)
+  -w, --html            generate html (default: False)
+  -o OUTPUT, --output OUTPUT
+                        path to the output folder (default: .)
 ```
 
-- `format` is either `epub` or `html`; if not specified will default to `epub`.
-- if `destination-path` is not sepcified the current working directory will be used.
+> [!NOTE]
+> Html output will create a `_site/` directory in the specified output folder, and write the generated html there.
 
 ## Markdown folder structure
 
@@ -24,6 +37,7 @@ $ md2book [format] path-to-markdown [destination-path]
   *.md
   images/
     *.jpg/png/svg/etc
+    favicon.svg
   css/
     custom.css
 ```
@@ -47,9 +61,13 @@ The `book.json` file must be present and specifies basic meta data (book title, 
 }
 ```
 
+### css/images folders
+
+The `css/` and `images/` folders need to be present even if they are empty.
+
 ## HTML
 
-favicon.svg in markdown images folder.
+favicon.svg in markdown `images/` folder.
 
 ## EPUB
 
