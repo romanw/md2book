@@ -1,8 +1,8 @@
 import argparse
 from pathlib import Path
 
-import md2epub
-import md2html
+from . import md2epub
+from . import md2html
 
 
 def main() -> None:

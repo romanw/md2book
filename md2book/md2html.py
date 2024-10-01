@@ -11,9 +11,9 @@ from pathlib import Path
 from shutil import copytree
 
 # import os
-from page_progress import PageProgress
-from prev_next import PrevNext
-from toc_nav import tocNav
+from .page_progress import PageProgress
+from .prev_next import PrevNext
+from .toc_nav import tocNav
 
 pageProgress = PageProgress()
 

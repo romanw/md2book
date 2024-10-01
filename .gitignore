@@ -162,6 +162,7 @@ cython_debug/
 #.idea/
 
 # my additions
+.ruff_cache/
 *.txt
 *.epub
 _site/

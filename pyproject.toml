@@ -1,6 +1,6 @@
 [project]
 name = "md2book"
-version = "2024.09.18"
+version = "2024.10.01"
 description = "My markdown to epub/html ebook generator."
 keywords = ["ebook", "markdown", "epub", "html", "generator"]
 readme = "README.md"
@@ -21,8 +21,12 @@ Repository = "https://github.com/romanw/md2book.git"
 
 
 [build-system]
-requires = ["setuptools >= 61.0"]
+requires = ["setuptools >= 61.0", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+md2book = ["*.css"]
+
 
 [tool.ruff]
 line-length = 320
