@@ -24,9 +24,6 @@ Repository = "https://github.com/romanw/md2book.git"
 requires = ["setuptools >= 61.0", "setuptools-scm>=8.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.package-data]
-md2book = ["*.css"]
-
 
 [tool.ruff]
 line-length = 320

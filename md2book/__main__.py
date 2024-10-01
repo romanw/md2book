@@ -6,7 +6,7 @@ from . import md2html
 
 
 def main() -> None:
-  ap = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+  ap = argparse.ArgumentParser(prog="md2book", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
   #ap.add_argument("-f", "--format", choices=["epub", "html"], default="epub", help="output format, either epub or html")
   ap.add_argument("-e", "--epub", action='store_true', default=True, help="generate an epub")
   ap.add_argument("-w", "--html", action='store_true', help="generate html")
